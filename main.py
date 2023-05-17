@@ -22,7 +22,7 @@ from pydantic import BaseModel, Field
 import uvicorn
 
 
-teste
+
 
 app = FastAPI()
 
