@@ -899,9 +899,11 @@ async def produto_busca_estoque(idempresa:str,
         DESCRSECAO,
         EMBALAGEMSAIDA,
         DATAFINALPROMOCAO,
+        DESCRFAIXA,
         CAST(MULTIPLOVENDA AS VARCHAR(20)) AS MULTIPLOVENDA,
         CAST(SUM(ESTOQUEGRAVATAI) AS VARCHAR(20)) AS ESTOQUEGRAVATAI,
         CAST(SUM(ESTOQUESEVERO) AS VARCHAR(20)) AS ESTOQUESEVERO
+        
 FROM
 (SELECT
         PRODUTOS_VIEW.IDSUBPRODUTO,
@@ -1057,7 +1059,7 @@ GROUP BY
 
     lista = []
     for index, row in carrega_busca_produtocompletoestoquedescricao.iterrows():
-        colunas = ["IDSUBPRODUTO", "DESCRCOMPRODUTO" , "PERCOMAVISTA", "VALPRECOVAREJO", "VALPROMVAREJO", "DESCRGRUPO", "DESCRSUBGRUPO", "DESCRSECAO", "ESTOQUEGRAVATAI", "ESTOQUESEVERO", "EMBALAGEMSAIDA", "DATAFINALPROMOCAO" ]
+        colunas = ["IDSUBPRODUTO", "DESCRCOMPRODUTO" , "PERCOMAVISTA", "VALPRECOVAREJO", "VALPROMVAREJO", "DESCRGRUPO", "DESCRSUBGRUPO", "DESCRSECAO", "ESTOQUEGRAVATAI", "ESTOQUESEVERO", "EMBALAGEMSAIDA", "DATAFINALPROMOCAO", "DESCRFAIXA" ]
         dados_produtocompleto_ciss = {coluna: row[coluna] for coluna in colunas}
         #dados_estoque_ciss_inicio= float(dados_estoque_ciss['QTDDISPONIVEL'])
         #dados_cliente_ciss = json.dumps(dados_cliente_ciss_inicio, sort_keys=True, indent=4)
