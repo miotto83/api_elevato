@@ -1046,6 +1046,7 @@ GROUP BY
         DESCRSUBGRUPO,
         DESCRSECAO,
         DATAFINALPROMOCAO,
+        DESCRFAIXA,
         MULTIPLOVENDA,
         EMBALAGEMSAIDA ''',conexao)
 
