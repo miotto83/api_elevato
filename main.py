@@ -899,9 +899,11 @@ async def produto_busca_estoque(idempresa:str,
         DESCRSECAO,
         EMBALAGEMSAIDA,
         DATAFINALPROMOCAO,
+        DESCRFAIXA,
         CAST(MULTIPLOVENDA AS VARCHAR(20)) AS MULTIPLOVENDA,
         CAST(SUM(ESTOQUEGRAVATAI) AS VARCHAR(20)) AS ESTOQUEGRAVATAI,
         CAST(SUM(ESTOQUESEVERO) AS VARCHAR(20)) AS ESTOQUESEVERO
+        
 FROM
 (SELECT
         PRODUTOS_VIEW.IDSUBPRODUTO,
@@ -960,6 +962,10 @@ LEFT JOIN DBA.PRODUTOS_SALDOS_VIEW AS PSV1
                                         (PPP.IDPRODUTO=PRODUTOS_VIEW.IDPRODUTO AND PPP.IDSUBPRODUTO=PRODUTOS_VIEW.IDSUBPRODUTO AND PPP.IDEMPRESA='{idempresa}')
                 LEFT JOIN DBA.PRODUTO_GRADE AS PRODUTO_GRADE ON
                                         (PRODUTO_GRADE.IDPRODUTO=PRODUTOS_VIEW.IDPRODUTO AND PRODUTO_GRADE.IDSUBPRODUTO=PRODUTOS_VIEW.IDSUBPRODUTO)
+                LEFT JOIN DBA.PRODUTO_FAIXA_DETALHE AS PRODUTO_FAIXA_DETALHE ON 
+                                        (PRODUTO_GRADE.IDTAMANHO = PRODUTO_FAIXA_DETALHE.IDTAMANHO)
+                LEFT JOIN DBA.PRODUTO_FAIXA AS PRODUTO_FAIXA ON 
+                                        (PRODUTO_FAIXA_DETALHE.IDFAIXA = PRODUTO_FAIXA.IDFAIXA)
                 where  (PRODUTOS_VIEW.DESCRCOMPRODUTO LIKE '%{fabricante}%') AND
                         (PSV1.QTDDISPONIVEL >= {qtdmaior}  OR {qtdmaior} = -99999)
                         AND PRODUTOS_VIEW.FLAGINATIVO='F'
@@ -1053,7 +1059,7 @@ GROUP BY
 
     lista = []
     for index, row in carrega_busca_produtocompletoestoquedescricao.iterrows():
-        colunas = ["IDSUBPRODUTO", "DESCRCOMPRODUTO" , "PERCOMAVISTA", "VALPRECOVAREJO", "VALPROMVAREJO", "DESCRGRUPO", "DESCRSUBGRUPO", "DESCRSECAO", "ESTOQUEGRAVATAI", "ESTOQUESEVERO", "EMBALAGEMSAIDA", "DATAFINALPROMOCAO" ]
+        colunas = ["IDSUBPRODUTO", "DESCRCOMPRODUTO" , "PERCOMAVISTA", "VALPRECOVAREJO", "VALPROMVAREJO", "DESCRGRUPO", "DESCRSUBGRUPO", "DESCRSECAO", "ESTOQUEGRAVATAI", "ESTOQUESEVERO", "EMBALAGEMSAIDA", "DATAFINALPROMOCAO", "DESCRFAIXA" ]
         dados_produtocompleto_ciss = {coluna: row[coluna] for coluna in colunas}
         #dados_estoque_ciss_inicio= float(dados_estoque_ciss['QTDDISPONIVEL'])
         #dados_cliente_ciss = json.dumps(dados_cliente_ciss_inicio, sort_keys=True, indent=4)
@@ -3356,7 +3362,6 @@ async def create_orcamento(orcamentocancelamento:OrcamentoPerdido):
             print(tstatus)
 
     return status
-
 
 @app.post('/itempedido/')
 async def create_item_pedido(itempedido:ItemPedido):
