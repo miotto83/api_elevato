@@ -960,6 +960,10 @@ LEFT JOIN DBA.PRODUTOS_SALDOS_VIEW AS PSV1
                                         (PPP.IDPRODUTO=PRODUTOS_VIEW.IDPRODUTO AND PPP.IDSUBPRODUTO=PRODUTOS_VIEW.IDSUBPRODUTO AND PPP.IDEMPRESA='{idempresa}')
                 LEFT JOIN DBA.PRODUTO_GRADE AS PRODUTO_GRADE ON
                                         (PRODUTO_GRADE.IDPRODUTO=PRODUTOS_VIEW.IDPRODUTO AND PRODUTO_GRADE.IDSUBPRODUTO=PRODUTOS_VIEW.IDSUBPRODUTO)
+                LEFT JOIN DBA.PRODUTO_FAIXA_DETALHE AS PRODUTO_FAIXA_DETALHE ON 
+                                        (PRODUTO_GRADE.IDTAMANHO = PRODUTO_FAIXA_DETALHE.IDTAMANHO)
+                LEFT JOIN DBA.PRODUTO_FAIXA AS PRODUTO_FAIXA ON 
+                                        (PRODUTO_FAIXA_DETALHE.IDFAIXA = PRODUTO_FAIXA.IDFAIXA)
                 where  (PRODUTOS_VIEW.DESCRCOMPRODUTO LIKE '%{fabricante}%') AND
                         (PSV1.QTDDISPONIVEL >= {qtdmaior}  OR {qtdmaior} = -99999)
                         AND PRODUTOS_VIEW.FLAGINATIVO='F'
@@ -3356,7 +3360,6 @@ async def create_orcamento(orcamentocancelamento:OrcamentoPerdido):
             print(tstatus)
 
     return status
-
 
 @app.post('/itempedido/')
 async def create_item_pedido(itempedido:ItemPedido):
