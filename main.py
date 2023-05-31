@@ -2673,7 +2673,8 @@ async def orcamentocabecalho_busca(idorcamento:str):
                 CAST(qtdproduto AS VARCHAR(20)) AS QTDPRODUTO,
                 CAST(valunitbruto AS VARCHAR(20)) AS VALUNITBRUTO,
                 CAST(valtotliquido AS VARCHAR(20)) AS VALTOTLIQUIDO,
-                CAST(valfrete AS VARCHAR (20)) AS VALFRETE
+                CAST(valfrete AS VARCHAR (20)) AS VALFRETE,
+                CAST(pv.pesobruto AS VARCHAR(20) * QTDPRODUTO AS VARCHAR(20)) AS PESOTOTALITEM
                 from dba.orcamento_prod as op
                 left join dba.produtos_view as pv
                 on op.idproduto=pv.idproduto and op.idsubproduto=pv.idsubproduto
