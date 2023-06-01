@@ -2666,6 +2666,7 @@ async def orcamentocabecalho_busca(idorcamento:str):
                 cast(pv.valmultivendas as varchar(20)) as VALMULTIVENDAS,
                 pv.embalagemsaida,
                 LR.idlocalestoque,
+                op.dtmovimento,
                 cast(valdescontopro as varchar(20)) as VALDESCONTOPRO,
                 cast(perdescontopro as varchar(20)) as PERDESCONTOPRO,
                 cast(vallucro as varchar(20)) as VALLUCRO,
