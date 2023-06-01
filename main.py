@@ -2651,7 +2651,7 @@ async def orcamentocabecalho_busca(idorcamento:str):
     cursor = conexao.cursor()
 
     carrega_busca_orcamentoitens =pd.read_sql(f''' select
-                idorcamento,
+                op.idorcamento,
                 op.idproduto,
                 op.idsubproduto,
                 descrambiente,
@@ -2666,7 +2666,7 @@ async def orcamentocabecalho_busca(idorcamento:str):
                 cast(pv.valmultivendas as varchar(20)) as VALMULTIVENDAS,
                 pv.embalagemsaida,
                 LR.idlocalestoque,
-                op.dtmovimento,
+                orc.dtmovimento,
                 cast(valdescontopro as varchar(20)) as VALDESCONTOPRO,
                 cast(perdescontopro as varchar(20)) as PERDESCONTOPRO,
                 cast(vallucro as varchar(20)) as VALLUCRO,
@@ -2675,13 +2675,15 @@ async def orcamentocabecalho_busca(idorcamento:str):
                 CAST(valunitbruto AS VARCHAR(20)) AS VALUNITBRUTO,
                 CAST(valtotliquido AS VARCHAR(20)) AS VALTOTLIQUIDO,
                 CAST(valfrete AS VARCHAR (20)) AS VALFRETE,
-                CAST(pv.pesobruto AS VARCHAR(20) * QTDPRODUTO AS VARCHAR(20)) AS PESOTOTALITEM
+                CAST(pv.pesobruto*QTDPRODUTO AS VARCHAR(20)) AS PESOTOTALITEM
                 from dba.orcamento_prod as op
                 left join dba.produtos_view as pv
                 on op.idproduto=pv.idproduto and op.idsubproduto=pv.idsubproduto
+                left join dba.orcamento as orc
+                on op.idorcamento=orc.idorcamento
                 left join dba.local_retirada as LR
                 on lr.idlocalretirada = op.idlocalretirada
-                where idorcamento =  '{idorcamento}' ''',conexao)
+                where op.idorcamento =  '{idorcamento}' ''',conexao)
 
     cursor.commit()
     cursor.close()
