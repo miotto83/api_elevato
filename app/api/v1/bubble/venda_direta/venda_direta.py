@@ -57,8 +57,8 @@ def create_sale(sale: SaleCreate, db: Session = Depends(database.get_db)):
     print(sale.dict())
     return {"ID": result.inserted_primary_key[0], **sale.dict()}
 
-@router.get("/", response_model=Sale)
-def read_sales(ID: int = None, db: Session = Depends(database.get_db)):
+@router.get("/{ID}", response_model=Sale)
+def read_sales(ID: int, db: Session = Depends(database.get_db)):
     stmt = select(sales_data).where(sales_data.c.ID == ID)
     result = db.execute(stmt).fetchone()
     if not result:
