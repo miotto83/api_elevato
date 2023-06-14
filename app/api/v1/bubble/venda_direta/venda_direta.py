@@ -6,11 +6,12 @@ from sqlalchemy import create_engine, MetaData, Table, select, and_
 from core.database import Database
 from core.config import get_connection_string
 from sqlalchemy import text
+from datetime import date
 
 # Define your models
 class SaleBase(BaseModel):
-    DATA_CRIACAO: Optional[str] = None
-    DATA_COMPRA: Optional[str] = None
+    DATA_CRIACAO: Optional[date] = None
+    DATA_COMPRA: Optional[date] = None
     UNIDADE: Optional[str] = None
     VENDEDOR: Optional[str] = None
     METODO_PAY: Optional[str] = None
