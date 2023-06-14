@@ -4,5 +4,4 @@ services:
     ports:
       - "5000:5000"
     volumes:
-      - ./app/api/v1:/app/api/v1
-      - ./app/main:/app/main
+      - ./app:/app

@@ -29,6 +29,6 @@ async def itens_pedido(idpedido: str):
     """
     logging.info(f"Endpoint '/itenspedido/{idpedido}' accessed successfully.")
 
-    df = await execute_query("consultas/itenspedido.sql", {":IDPEDIDO": idpedido})
+    df = await execute_query("ciss_db2", "consultas/itenspedido.sql", {":IDPEDIDO": idpedido})
 
     return await process_results(df, columns, return_with_data=True)
