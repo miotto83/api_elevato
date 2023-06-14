@@ -14,7 +14,7 @@ async def produto_busca_fabricante(idempresa: str, idfabricante: str):
     Para visualizar o retorno, basta colocar "PISO PORTINARI" no idfabricante e "1" no idempresa.
     Em cada execução, ele retorna uma lista de idsubprodutos.
     """
-    df_produtocompletofabricante = await execute_query(
+    df_produtocompletofabricante = await execute_query("ciss_db2", 
         "consultas/produtocompletofabricante.sql", {":IDEMPRESA": idempresa, ":IDFABRICANTE": idfabricante}
     )
     return await process_results(df_produtocompletofabricante, colunas, return_with_data=True)

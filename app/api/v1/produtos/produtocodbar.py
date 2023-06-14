@@ -11,6 +11,6 @@ columns = ["IDCODBARPROD"]
 async def produto_busca(idproduto: str):
     logging.info(f"Endpoint '/produtocodbar/{idproduto}' accessed successfully.")
 
-    df = await execute_query("consultas/produtocodbar.sql", {":IDPRODUTO": idproduto})
+    df = await execute_query("ciss_db2", "consultas/produtocodbar.sql", {":IDPRODUTO": idproduto})
 
     return await process_results(df, columns)

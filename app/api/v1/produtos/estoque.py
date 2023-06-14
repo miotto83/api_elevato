@@ -17,6 +17,6 @@ async def estoque_busca(idproduto: str):
     """
     logging.info(f"Endpoint '/estoque/{idproduto}' accessed successfully.")
 
-    df = await execute_query("consultas/estoque.sql", {":IDPRODUTO": idproduto})
+    df = await execute_query("ciss_db2", "consultas/estoque.sql", {":IDPRODUTO": idproduto})
 
     return await process_results(df, columns)

@@ -27,6 +27,6 @@ async def orcamentocabecalho_busca(idsubproduto: str):
 
     replace_dict = {":IDSUBPRODUTO": idsubproduto}
 
-    df = await execute_query("consultas/buscaestoquelote.sql", replace_dict)
+    df = await execute_query("ciss_db2", "consultas/buscaestoquelote.sql", replace_dict)
 
     return await process_results(df, columns, return_with_data=True)

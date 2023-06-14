@@ -16,6 +16,6 @@ async def vendas_resumo(idvendedor: str):
     """
     logging.info(f"Endpoint '/vendasresumo/{idvendedor}' accessed successfully.")
 
-    df = await execute_query("consultas/vendasresumo.sql", {":IDVENDEDOR": idvendedor})
+    df = await execute_query("ciss_db2", "consultas/vendasresumo.sql", {":IDVENDEDOR": idvendedor})
 
     return await process_results(df, columns)

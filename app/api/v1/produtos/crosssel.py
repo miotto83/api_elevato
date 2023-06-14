@@ -30,6 +30,6 @@ async def produto_busca(idsubproduto: str):
     """
     logging.info(f"Endpoint '/crosssel/{idsubproduto}' accessed successfully.")
 
-    df = await execute_query("consultas/crosssell.sql", {":IDSUBPRODUTO": idsubproduto})
+    df = await execute_query("ciss_db2", "consultas/crosssell.sql", {":IDSUBPRODUTO": idsubproduto})
 
     return await process_results(df, columns, return_with_data=True)

@@ -31,7 +31,7 @@ async def produto_busca_estoque(idempresa: str, fabricante: str):
     fabricante = 1990 (referência da Deca - chuveiros)
     """
     fabricante = fabricante.replace(" ", "%")
-    df = await execute_query(
+    df = await execute_query("ciss_db2", 
         "consultas/produtocompletoreferencia.sql", {":IDEMPRESA": idempresa, ":FABRICANTE": fabricante}
     )
     return await process_results(df, colunas, return_with_data=True)

@@ -17,6 +17,6 @@ async def orcamentocabecalho_busca(idvendedor: str):
     """
     logging.info(f"Endpoint '/orcamentocabecalho/{idvendedor}' accessed successfully.")
 
-    df = await execute_query("consultas/orcamentocabecalho.sql", {":IDVENDEDOR": idvendedor})
+    df = await execute_query("ciss_db2", "consultas/orcamentocabecalho.sql", {":IDVENDEDOR": idvendedor})
 
     return await process_results(df, columns, return_with_data=True)

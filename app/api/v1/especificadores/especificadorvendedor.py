@@ -32,6 +32,6 @@ async def especificadorvendedor_busca(idvendedor: str):
     """
     logging.info(f"Endpoint '/especificadorvendedor/{idvendedor}' accessed successfully.")
 
-    df = await execute_query("consultas/especificadorvendedor.sql", {":IDVENDEDOR": idvendedor})
+    df = await execute_query("ciss_db2", "consultas/especificadorvendedor.sql", {":IDVENDEDOR": idvendedor})
 
     return await process_results(df, columns, return_with_data=True)

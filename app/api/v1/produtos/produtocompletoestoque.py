@@ -17,7 +17,7 @@ async def produto_busca_estoque(idempresa: str, qtdmaior: str):
     idempresa = 1
     qtdmaior = 100
     """
-    df = await execute_query(
+    df = await execute_query("ciss_db2", 
         "consultas/produtocompletoestoque.sql", {":IDEMPRESA": idempresa, ":QTDMAIOR": qtdmaior}
     )
     return await process_results(df, colunas, return_with_data=True)

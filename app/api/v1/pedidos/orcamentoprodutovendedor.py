@@ -18,7 +18,7 @@ async def orcamentocabecalho_busca(idvendedor: str, idproduto: str):
     """
     logging.info(f"Endpoint '/orcamentoprodutovendedor/{idvendedor}&{idproduto}' accessed successfully.")
 
-    df = await execute_query(
+    df = await execute_query("ciss_db2", 
         "consultas/orcamentoprodutovendedor.sql", {":IDVENDEDOR": idvendedor, ":IDPRODUTO": idproduto}
     )
 

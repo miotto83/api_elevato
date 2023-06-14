@@ -17,6 +17,6 @@ async def orcamentocabecalho_busca():
     """
     logging.info(f"Endpoint '/produtosmaisorcados/' accessed successfully.")
 
-    df = await execute_query("consultas/produtosmaisorcados.sql", {})
+    df = await execute_query("ciss_db2", "consultas/produtosmaisorcados.sql", {})
 
     return await process_results(df, columns, return_with_data=True)

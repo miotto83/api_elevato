@@ -38,7 +38,7 @@ async def produto_busca(idempresa: str, idprodutos: str):
     Em cada execução ele retorna uma lista de registros (conforme a quantidade de códigos de produtos enviado).
     Os campos que retornam serão apresentados na simulação.
     """
-    df = await execute_query(
+    df = await execute_query("ciss_db2", 
         "consultas/produtocompleto.sql", {":IDEMPRESA": idempresa, ":IDPRODUTOS": idprodutos}
     )
     return await process_results(df, colunas)

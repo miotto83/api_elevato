@@ -17,6 +17,6 @@ async def especificadores_busca(cnpjcpf: str):
     """
     logging.info(f"Endpoint '/especificadores/{cnpjcpf}' accessed successfully.")
 
-    df = await execute_query("consultas/especificadores.sql", {":CNPJCPF": cnpjcpf})
+    df = await execute_query("ciss_db2", "consultas/especificadores.sql", {":CNPJCPF": cnpjcpf})
 
     return await process_results(df, columns)

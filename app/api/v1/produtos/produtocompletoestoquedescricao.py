@@ -34,6 +34,7 @@ async def produto_busca_estoque(idempresa: str, fabricante: str, qtdmaior: float
     """
     fabricante = fabricante.replace(" ", "%")
     df = await execute_query(
+        "ciss_db2", 
         "consultas/produtocompletoestoquedescricao.sql",
         {":IDEMPRESA": idempresa, ":FABRICANTE": fabricante, ":QTDMAIOR": str(qtdmaior)},
     )
